@@ -154,21 +154,27 @@ nav a {
   }
 }
 
-.carousel-inner {
+/* IMPORTANTE: estas regras usavam a classe genérica ".carousel-inner", que é
+   também o nome de classe interno do carrossel do Bootstrap (usado mais abaixo
+   em #carouselDiferenciais). Isso fazia o carrossel do Bootstrap herdar
+   "height: 80vh" e criar um vão enorme de espaço em branco antes do título
+   "Nossos Diferenciais". Por isso, escopamos tudo para #heroCarousel, que é
+   exclusivo do carrossel do topo. */
+#heroCarousel {
   height: 80vh; /* AJUSTADO: Mesma altura do carrossel antigo */
   position: relative;
   overflow: hidden; /* Garante que nada saia dos limites */
 }
 
 /* --- Contêiner que guarda as imagens --- */
-.carousel-inner .carroussel--container {
+#heroCarousel .carroussel--container {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
 /* --- Estilo para TODAS as imagens dentro do contêiner --- */
-.carousel-inner .carroussel--container > img {
+#heroCarousel .carroussel--container > img {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -179,12 +185,12 @@ nav a {
 }
 
 /* --- Deixa a PRIMEIRA imagem visível --- */
-.carousel-inner .carroussel--container > img:first-child {
+#heroCarousel .carroussel--container > img:first-child {
   opacity: 1;
 }
 
 /* --- Contêiner do texto e botão, sobreposto às imagens --- */
-.carousel-inner .carroussel--text {
+#heroCarousel .carroussel--text {
   position: absolute;
   top: 0;
   left: 0;
@@ -198,7 +204,7 @@ nav a {
 }
 
 /* --- Estilo da chamada de texto --- */
-.carousel-inner .carroussel--text__call {
+#heroCarousel .carroussel--text__call {
   padding: 5px 10px;
   font-size: 24px;
   color: white;
@@ -207,7 +213,7 @@ nav a {
 }
 
 /* --- Estilo do botão --- */
-.carousel-inner .carroussel--text__btn {
+#heroCarousel .carroussel--text__btn {
   border: none;
   border-radius: 4px;
   padding: 10px;
@@ -216,8 +222,14 @@ nav a {
   color: white;
 }
 
-.carousel-inner .carroussel--text__btn:hover {
+#heroCarousel .carroussel--text__btn:hover {
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  #heroCarousel {
+    height: 60vh; /* em telas pequenas, 80vh some abrir espaço desnecessário */
+  }
 }
 
 section {
@@ -241,9 +253,17 @@ section h2 {
 }
 
 .sobre-nos p {
-  width: 800px;
+  width: 100%;
+  max-width: 700px;
   font-size: 1.5rem;
   margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .sobre-nos p {
+    font-size: 1.1rem;
+    padding: 0 0.5rem;
+  }
 }
 
 #produtos {
@@ -649,11 +669,13 @@ section h2 {
     gap: 20px;
     padding: 1rem;
     justify-items: center;
+    align-items: stretch;
 }
 
 .pizza-destaque-content {
     width: 100%;
     max-width: 300px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -680,6 +702,7 @@ section h2 {
 .pizza-destaque-texto {
     width: 100%;
     padding: 10px;
+    text-align: center;
 }
 
 .pizza-destaque-texto h3 {
@@ -691,9 +714,10 @@ section h2 {
 
 .pizza-destaque-texto p {
     font-size: 1em;
-    margin: 5px 0;
+    margin: 4px 0;
     color: #555;
     font-weight: 500;
+    line-height: 1.3;
 }
 
 /* Ajuste para telas menores que 768px */
@@ -701,6 +725,23 @@ section h2 {
     .pizza-destaque-container {
         grid-template-columns: repeat(2, 1fr);
         justify-items: center;
+        gap: 16px;
+    }
+
+    .pizza-destaque-content {
+        max-width: 100%;
+    }
+}
+
+/* Em telas bem estreitas, 2 colunas ficam apertadas para cards com listas
+   de ingredientes de tamanhos diferentes — melhor usar 1 coluna */
+@media (max-width: 480px) {
+    .pizza-destaque-container {
+        grid-template-columns: 1fr;
+    }
+
+    .pizza-destaque-content {
+        max-width: 320px;
     }
 }
 
