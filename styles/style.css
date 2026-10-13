@@ -1,6 +1,7 @@
 :root {
     --verde: #14532d;
     --laranja: #f97316;
+    --laranja-escuro: #ea580c;
     --preto: #000000;
     --branco: #ffffff;
     --cinza-claro: #f9f9f9;
@@ -64,7 +65,8 @@ header .logo {
 
 .menu {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
+  align-items: center;
 }
 
 .menu a {
@@ -75,6 +77,36 @@ header .logo {
 
 .menu a:hover {
   text-decoration: underline;
+}
+
+/* Botão "Fazer pedido" em destaque — pílula laranja, sempre por último (à direita) */
+.menu a.btn-destaque {
+  background-color: #f97316;
+  background: var(--laranja);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.menu a.btn-destaque i {
+  font-size: 1rem;
+}
+
+.menu a.btn-destaque:hover {
+  background-color: #ea580c;
+  background: var(--laranja-escuro);
+  color: #ffffff;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.45);
 }
 
 /* Botão hamburguer */
@@ -96,13 +128,19 @@ header .logo {
     position: absolute;
     top: 100%;
     right: 0;
-    width: 200px;
+    width: 220px;
     padding: 1rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    align-items: stretch;
+    text-align: center;
   }
 
   .menu.show {
     display: flex;
+  }
+
+  .menu a.btn-destaque {
+    justify-content: center;
   }
 
   .menu-toggle {
